@@ -23,17 +23,16 @@ import static java.util.Objects.isNull;
 
 /**
  * Sample init data loader. If the application is run with `loadInitialData` profile, then on application startup it will fill the database with dummy data,
- * for the manual testing purposes. Loader is triggered by {@link ContextRefreshedEvent } event
+ * for the manual testing purposes. Loader is triggered by {@link ContextRefreshedEvent } event.
  */
 @Component
 @Profile("loadInitialData")
 @Slf4j
 @ToString
 @RequiredArgsConstructor
-class InitialDataLoader {
+public class InitialDataLoader {
 
     private final JpaRepository<User, Long> userRepository;
-
     private final JpaRepository<Training, Long> trainingRepository;
 
     @EventListener
@@ -47,7 +46,7 @@ class InitialDataLoader {
         List<User> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
 
-
+        log.info("Loaded {} users and {} trainings", sampleUserList.size(), sampleTrainingList.size());
         log.info("Finished loading initial data");
     }
 
@@ -164,8 +163,10 @@ class InitialDataLoader {
 
     private void verifyDependenciesAutowired() {
         if (isNull(userRepository)) {
-            throw new IllegalStateException("Initial data loader was not autowired correctly " + this);
+            throw new IllegalStateException("User repository was not autowired correctly " + this);
+        }
+        if (isNull(trainingRepository)) {
+            throw new IllegalStateException("Training repository was not autowired correctly " + this);
         }
     }
-
 }
