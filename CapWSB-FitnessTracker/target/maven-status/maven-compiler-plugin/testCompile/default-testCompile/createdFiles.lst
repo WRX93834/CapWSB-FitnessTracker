@@ -1,0 +1,5 @@
+pl\wsb\fitnesstracker\IntegrationTestBase.class
+pl\wsb\fitnesstracker\user\internal\UserApiIntegrationTest.class
+pl\wsb\fitnesstracker\training\TrainingApiIntegrationTest.class
+pl\wsb\fitnesstracker\IntegrationTest.class
+pl\wsb\fitnesstracker\CapFitnessTrackerApplicationTests.class
